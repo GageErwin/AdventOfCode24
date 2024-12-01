@@ -100,6 +100,7 @@ func main() {
 	totalDiff := part1(ayy1, ayy2)
 	fmt.Println("Part 1: ", totalDiff)
 	fmt.Printf("TTC: %d ns\n\n", time.Since(part1Time).Nanoseconds())
+	// Part 2
 	part2Time := time.Now()
 	oftenMul := part2(ayy1, ayy2)
 	fmt.Println("Part 2: ", oftenMul)

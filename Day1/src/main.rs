@@ -1,11 +1,12 @@
+use std::env;
 use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
 use std::time::{SystemTime, UNIX_EPOCH};
 
-fn read_file() -> String {
+fn read_file(file_name: &String) -> String {
     // Create a path to the desired file
-    let path = Path::new("C:/Users/GageE/OneDrive/Documents/Development/AOC24/day1/input.txt");
+    let path = Path::new(&file_name);
     let display = path.display();
 
     // Open the path in read-only mode
@@ -43,7 +44,12 @@ fn part2(a: &Vec<i32>, b: &Vec<i32>) -> i32 {
 }
 
 fn main() {
-    let files = read_file();
+    let args: Vec<String> = env::args().collect();
+    if args.len() < 2 {
+        panic!("File name is required")
+    }
+    let file_name = &args[1];
+    let files = read_file(file_name);
     let lines = files.lines();
     let mut data1: Vec<i32> = Vec::new();
     let mut data2: Vec<i32> = Vec::new();
