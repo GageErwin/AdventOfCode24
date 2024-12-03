@@ -1,7 +1,5 @@
 package main
 
-// TODO: Fails
-
 import (
 	"fmt"
 	"log"
