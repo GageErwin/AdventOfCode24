@@ -24,7 +24,7 @@ fn read_file(file_name: &String) -> String {
     return s;
 }
 
-fn part1(data: String) -> i32 {
+fn part1(data: &String) -> i32 {
     let mut result: i32 = 0;
     let re = Regex::new(r"mul\(\d+,\d+\)").unwrap();
     let num = Regex::new(r"\d+").unwrap();
@@ -38,21 +38,29 @@ fn part1(data: String) -> i32 {
     result
 }
 
-// fn part2(data: String) -> i32 {
-//     let mut result: i32 = 0;
-//     let mut start: bool = true;
-//     let info: Vec<&str> = data.split("don't");
-//     let re = Regex::new(r"mul\(\d+,\d+\)").unwrap();
-//     let num = Regex::new(r"\d+").unwrap();
-//     let values: Vec<&str> = re.find_iter(&data).map(|m| m.as_str()).collect();
-//     for n in values {
-//         let ints: Vec<&str> = num.find_iter(n).map(|m| m.as_str()).collect();
-//         let value1 = ints[0].parse::<i32>().unwrap();
-//         let value2 = ints[1].parse::<i32>().unwrap();
-//         result += value1 * value2;
-//     }
-//     result
-// }
+fn part2(data: &String) -> i32 {
+    let mut result: i32 = 0;
+    let mut valid = String::new();
+    let info: Vec<&str> = data.split("don't").collect();
+    valid += info[0];
+    for l in info {
+        let do_index = match l.find("do()") {
+            Some(do_index) => do_index,
+            None => continue,
+        };
+        valid += &l[do_index..];
+    }
+    let re = Regex::new(r"mul\(\d+,\d+\)").unwrap();
+    let num = Regex::new(r"\d+").unwrap();
+    let values: Vec<&str> = re.find_iter(&valid).map(|m| m.as_str()).collect();
+    for n in values {
+        let ints: Vec<&str> = num.find_iter(n).map(|m| m.as_str()).collect();
+        let value1 = ints[0].parse::<i32>().unwrap();
+        let value2 = ints[1].parse::<i32>().unwrap();
+        result += value1 * value2;
+    }
+    result
+}
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -61,6 +69,8 @@ fn main() {
     }
     let file_name = &args[1];
     let data = read_file(file_name);
-    let part_1_result = part1(data);
+    let part_1_result = part1(&data);
     println!("Part 1: {}", part_1_result);
+    let part_2_result = part2(&data);
+    println!("Part 2: {}", part_2_result);
 }
