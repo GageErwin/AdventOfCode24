@@ -1,4 +1,5 @@
 import re
+from time import perf_counter_ns
 
 
 def readFile(file_name: str):
@@ -39,10 +40,12 @@ def part2(info: str):
 
 def main():
     info = readFile("input.txt")
+    start_time = perf_counter_ns()
     part_1_result = part1(info)
     print(f"Part 1: {part_1_result}")
-    part_2_result = part2(info)
-    print(f"Part 2: {part_2_result}")
+    print(f"TTC: {perf_counter_ns() - start_time}ns")
+    # part_2_result = part2(info)
+    # print(f"Part 2: {part_2_result}")
 
 
 if __name__ == "__main__":
