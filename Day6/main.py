@@ -12,6 +12,8 @@ def turn_right(direction):
         direction = [1,0]
     return direction
 
+
+
 def part1(puzzle, direction, start):
   positions = set()
   while True:
@@ -29,10 +31,10 @@ def part1(puzzle, direction, start):
         direction = turn_right(direction)
     except IndexError:
       break
-  return len(positions)
+  return positions
 
 def main():
-  puzzle = open("input.txt", "r").read().splitlines()
+  puzzle = open("example.txt", "r").read().splitlines()
   for r_index, row in enumerate(puzzle):
     for c_index, col in enumerate(row):
       if col in ["<",">", "v", "^"]:
@@ -46,8 +48,10 @@ def main():
         elif col == "v":
           direction = (1, 0)
   start_time = perf_counter_ns()
-  part_1 = part1(puzzle, direction, start)
-  print(f"Part 1: {part_1}")
+  positions = part1(puzzle, direction, start)
+  print(f"Part 1: {len(positions)}")
+  # part_2 = part2(puzzle)
+  # print(f"Part 2: {part_2}")
   print(f"TTC: {perf_counter_ns() - start_time}ns")
       
 

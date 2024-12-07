@@ -57,7 +57,7 @@ def part2(rules, checks):
 
 
 def main():
-    data = open("input.txt", "r").read().splitlines()
+    data = open("example.txt", "r").read().splitlines()
     rules = []
     checks = []
     for line in data:
@@ -72,6 +72,7 @@ def main():
     part_1_solution = part1(rules, checks)
     print(f"Part 1: {part_1_solution}")
     part_2_solution = part2(rules, checks)
+    print(f"TTC part 1: {perf_counter_ns() - start_time}ns")
     print(f"Part 2: {part_2_solution}")
     print(f"TTC: {perf_counter_ns() - start_time}ns")
 
