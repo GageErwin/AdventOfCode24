@@ -62,18 +62,12 @@ def main():
     r, c = node
     if 0 <= r < row and 0 <= c < col:
       counter += 1
-  print(f"Part 1 : {counter}")
+  print(f"Part 1: {counter}")
   puzzle = []
   for line in grid:
     puzzle.append([x for x in line])
   part_2 = part2(antenna, row, col)
-  for x,y in part_2:
-    puzzle[x][y] = "#"
-
-  for p in puzzle:
-    print(p)
-
-  print(f"Part 2 : {len(part_2)}")
+  print(f"Part 2: {len(part_2)}")
 
 
 
