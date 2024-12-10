@@ -15,24 +15,25 @@ def main():
         elif len(files) == 1:
             block = int(files[0])
             file_format += f"{i}" * block
-    file_format_split = [x for x in file_format]
-    num_count = 0
-    for value in file_format_split:
-        if value.isdigit():
-            num_count += 1
-    for index, x in enumerate(file_format_split[::-1]):
-        if x == ".":
-            continue
-        for i, char in enumerate(file_format_split):
-            if char == ".":
-                file_format_split[i] = x
-                break
+    file_format = [x for x in file_format]
+    back_count = len(file_format) - 1
+    while back_count >= 0:
+        last = file_format[back_count]
+        if last != ".":
+            for i, num in enumerate(file_format):
+                if num == ".":
+                    file_format[i] = last
+                    file_format[back_count] = "."
+                    break
+        else:
+            back_count -= 1
 
-    for i in range(num_count, len(file_format_split)):
-        file_format_split[i] = "."
+    file_format.pop(0)
+    file_format.append(".")
+    print(file_format)
     result = 0
-    for i, num in enumerate(file_format_split):
-        if num.isdigit():
+    for i, num in enumerate(file_format):
+        if num != ".":
             result += i * int(num)
     print(f"Part 1: {result}")
     print(f"TTC: {perf_counter_ns() - start}ns")
