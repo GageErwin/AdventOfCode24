@@ -31,8 +31,8 @@ def part2(data1, data2):
 
 def main():
     start_time = time.perf_counter_ns()
-    # data = readFile("example.txt")
-    data = readFile("input.txt")
+    data = readFile("example.txt")
+    # data = readFile("input.txt")
     data_list = data.splitlines()
     list1 = []
     list2 = []
